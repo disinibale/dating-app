@@ -1,0 +1,14 @@
+# Testing
+/coverage
+
+# Modules
+/node_modules
+
+# Compiled Output
+/dist
+
+# Test
+/__test__
+
+# Env
+.env
