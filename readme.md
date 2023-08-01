@@ -17,20 +17,21 @@ The project follows a well-organized folder structure to maintain code readabili
 
 ```
 ├── src
+│ ├── __test__
 │ ├── app
-| | | __test__
 │ │ ├── controllers
 │ │ ├── middlewares
-│ │ ├── models
 │ │ ├── routes
 │ │ ├── services
+│ | ├── exceptions
+│ | ├── services
 │ │ └── utils
 │ ├── config
 │ ├── database
-│ ├── exceptions
-│ ├── logger
+│ ├── models
 │ ├── types
-│ ├── app.ts
+│ ├── logger.ts
+│ ├── server.ts
 │ └── main.ts
 ├── .env.example
 ├── .eslintrc.js
@@ -39,7 +40,8 @@ The project follows a well-organized folder structure to maintain code readabili
 ├── package.json
 ├── README.md
 ├── tsconfig.json
-└── package.lock
+├── package.json
+└── package-lock.json
 ```
 
 
