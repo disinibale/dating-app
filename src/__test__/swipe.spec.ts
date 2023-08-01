@@ -12,7 +12,7 @@ import userSwipeService from '../app/services/userSwipe.service';
 import { Op } from 'sequelize';
 
 
-describe('Profile API', () => {
+describe('Profile Matching API', () => {
     let app: Express
     let authToken: string = ''
     const mockProfile: Profile[] = []

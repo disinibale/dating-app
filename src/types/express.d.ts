@@ -1,13 +1,14 @@
+export {}
 declare global {
     namespace Express {
         export interface Request {
             user?: {
-                userId?: number | undefined
-                email?: string | undefined
-                fullname?: string | undefined
-                iat?: number | undefined
-                exp?: number | undefined
-            } | undefined | null
+                userId?: number
+                email?: string
+                fullname?: string
+                iat?: number
+                exp?: number
+            } | null
         }
     }
 }

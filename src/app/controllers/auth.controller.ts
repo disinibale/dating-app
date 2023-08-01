@@ -6,6 +6,7 @@ import { UserCreationAttributes } from "../../models/interfaces/user.interface";
 export async function register(req: Request, res: Response, next: NextFunction): Promise<void> {
     const payload = req.body as UserCreationAttributes
     try {
+        console.log(payload, '<<<< PAYLOAD')
         const user = await authService.signUp(payload)
 
         res.status(201).json({
@@ -14,6 +15,7 @@ export async function register(req: Request, res: Response, next: NextFunction):
             data: user
         })
     } catch (err) {
+        console.error(err, '<<<<<<<<<<<<<<<<<<<<<<<<<<< ERROR')
         next(err)
     }
 }

@@ -9,8 +9,4 @@ const profileRoute = Router()
 profileRoute.get('/', authenticate, getMyProfile)
 profileRoute.put('/', authenticate, createValidator(ProfileDto), updateProfile)
 
-profileRoute.get('/view', authenticate)
-profileRoute.post('/pass/:profileId', authenticate)
-profileRoute.post('/like/:profileId', authenticate)
-
 export default profileRoute

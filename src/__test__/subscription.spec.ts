@@ -5,7 +5,7 @@ import UserSubscriptions from '../models/userSubscription.model';
 import createServer from '../server';
 import userSubscriptionsService from '../app/services/userSubscriptions.service';
 
-describe('Profile API', () => {
+describe('Subscription API', () => {
     let app: Express
     let authToken: string = ''
 

@@ -6,13 +6,14 @@ import { UserCreationAttributes } from "../../models/interfaces/user.interface";
 
 import NotFoundException from '../exceptions/clientException/notFound.exception';
 import UnauthorizedException from '../exceptions/clientException/unauthorized.exception';
-import EmailAlreadyRegisteredException from '../exceptions/clientException/emailAlreadyRegistered.exception';
 
 import connection from '../../database/connection';
 import { generateToken } from '../utils/jwt.utils';
 import { Transaction } from 'sequelize';
 import ProfileService from './profile.service';
 import { ProfileCreationAttributes } from '../../models/interfaces/profile.interface';
+// import ConflictRequestException from '../exceptions/clientException/conflictRequest.exception';
+import EmailAlreadyRegisteredException from '../exceptions/clientException/emailAlreadyRegistered.exception';
 
 class AuthService {
     private userService

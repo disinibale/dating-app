@@ -4,23 +4,26 @@ import { Express } from 'express';
 import { faker } from '@faker-js/faker';
 import { RegisterDto } from '../app/controllers/dto/auth.dto';
 import createServer from '../server';
+import userService from '../app/services/user.service';
 
 describe('Authentication API', () => {
     let app: Express
+    const userData = {
+        fullname: `Unit Test ${new Date().toISOString()}`,
+        email: `unit_${faker.person.lastName()}@mail.com`,
+        password: 'password'
+    } as RegisterDto
+
+    console.log(userData, '<<<<<<<<<< USER DATA')
 
     beforeAll(async () => {
         app = await createServer()
     })
 
-    afterAll(() => {
-        
+    afterAll(async () => {
+        await userService.delete({ where: { email: userData.email } })
     })
 
-    const userData = {
-        fullname: faker.person.fullName(),
-        email: faker.internet.email(),
-        password: 'P@ssw0rd'
-    } as RegisterDto
 
     it('Should register a new user', async () => {
         const response = await request(app).post('/api/v1/auth/register').send(userData)
