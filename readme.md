@@ -2,9 +2,14 @@
 
 This Simple Dating App backend is built using TypeScript-Express service using PostgreSQL. It provides server-side functionalities for the Dating App, allowing users to create profiles, browse potential matches, and purchase premium subscriptions.
 
+## Useful Links
+- [API Documentation](https://www.postman.com/disinibale11/workspace/usedealls-dating-apps-technical-test/overview)
+- [Personal Website](https://disinibale.com)
+
 ## Table of Contents
 
 - [Dating App Backend](#dating-app-backend)
+  - [Useful Links](#useful-links)
   - [Table of Contents](#table-of-contents)
   - [Folder Structure](#folder-structure)
   - [API Endpoint Structure](#api-endpoint-structure)
