@@ -18,6 +18,7 @@ The project follows a well-organized folder structure to maintain code readabili
 ```
 ├── src
 │ ├── app
+| | | __test__
 │ │ ├── controllers
 │ │ ├── middlewares
 │ │ ├── models
@@ -31,11 +32,6 @@ The project follows a well-organized folder structure to maintain code readabili
 │ ├── types
 │ ├── app.ts
 │ └── main.ts
-├── tests
-│ ├── auth.spec.ts
-│ ├── profile.spec.ts
-│ ├── subscription.spec.ts
-│ └── swipe.spec.ts
 ├── .env.example
 ├── .eslintrc.js
 ├── .gitignore
@@ -57,7 +53,7 @@ The backend exposes the following API endpoints:
 - `PUT api/v1/profile`: Update the user's profile.
 - `GET api/v1/matching`: Browse potential matches.
 - `GET api/v1/matching/swipe`: Swipe for potential matches.
-- `POST api/v1/subscription/purchase`: Get list of premium feature subscription
+- `POST api/v1/subscription/purchase`: Get the list of premium feature subscription
 - `POST api/v1/subscription/purchase`: Purchase a premium subscription.
 
 ## How to Run the Service on a Local Machine
@@ -106,25 +102,30 @@ This is a List of the test cases that can be used to test the correctness of the
 ```
 Authentication API                                                                                                                                                                                                          
 √ Should register a new user (215 ms)                                                                                                                                                                                     
-√ Should check if email is already registered (35 ms)                                                                                                                                                                     
+√ Should check if the email is already registered (35 ms)                                                                                                                                                                     
 √ Should authenticate the created user (61 ms)
 
 Subscription API
-√ Can view all premium package (11 ms)                                                                                                                                                                                    
+√ Can view all premium packages (11 ms)                                                                                                                                                                                    
 √ Prevent invalid price (24 ms)                                                                                                                                                                                           
-√ Can purchase a unlimited swipe (67 ms)                                                                                                                                                                                  
+√ Can purchase an unlimited swipe (67 ms)                                                                                                                                                                                  
 √ Prevent purchasing the same package (20 ms)                                                                                                                                                                             
 √ Can purchase verified badge (58 ms)                                                                                                                                                                                     
-√ Prevent picking package is not exist if user send invalid package id (13 ms)
+√ Prevent picking a package is not exist if a user sends an invalid package id (13 ms)
 
 Profile Matching API
-√ Can browse potential match and showing profiles of user opposite gender (23 ms)                                                                                                                                         
+√ Can browse potential matches and show profiles of users of the opposite gender (23 ms)                                                                                                                                         
 √ Can swipe right the potential match (67 ms)                                                                                                                                                                             
 √ Cannot swipe the same profile within the same day (28 ms)                                                                                                                                                               
 √ Can swipe left the potential match (60 ms)                                                                                                                                                                              
-√ Can only swipe for maximum 10 profile per days (513 ms)
+√ Can only swipe for a maximum of 10 profiles per day (513 ms)
 
 Profile API
-√ should get the users own profile (27 ms)                                                                                                                                                                                
+√ should get the user's own profile (27 ms)                                                                                                                                                                                
 √ should update the user's profile (67 ms)
 ```
+To run the test you could simply copying this command to your CLI : 
+``` bash
+npm run test
+```
+Note: Before you can run the test, make sure you have run the migration first so the data would be populated.
