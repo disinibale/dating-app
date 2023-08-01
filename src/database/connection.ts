@@ -7,5 +7,6 @@ const databaseConfig = Config.getDatabaseConfig()
 
 export default new Sequelize({
     ...databaseConfig,
-    models: Models
+    models: Models,
+    storage: '',
 })

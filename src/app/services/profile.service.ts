@@ -64,6 +64,11 @@ class ProfileService extends BaseService<Profile> {
                     [Op.ne]: gender
                 }
             },
+            include: [{
+                model: User,
+                as: 'user',
+                attributes: ['id', 'fullname']
+            }],
             limit: 10,
             order: Sequelize.literal('RANDOM()')
         })

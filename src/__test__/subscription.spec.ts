@@ -1,8 +1,8 @@
 import request from 'supertest';
 import { Express } from 'express';
 
-import UserSubscriptions from '../models/userSubscription.model';
 import createServer from '../server';
+import UserSubscriptions from '../models/userSubscription.model';
 import userSubscriptionsService from '../app/services/userSubscriptions.service';
 
 describe('Subscription API', () => {
@@ -18,13 +18,13 @@ describe('Subscription API', () => {
         })
 
         authToken = response.body.data.token
-    });
+    }, 10000);
 
     afterAll(async () => {
         await userSubscriptionsService.delete({ where: {} })
     });
 
-    it('Can view all premium package', async () => {
+    test('Can view all premium package', async () => {
         const response = await request(app).get('/api/v1/subscription')
 
         expect(response.statusCode).toBe(200)
@@ -32,7 +32,7 @@ describe('Subscription API', () => {
         expect(response.body).toEqual<UserSubscriptions[]>
     })
 
-    it('Prevent invalid price', async () => {
+    test('Prevent invalid price', async () => {
         const response = await request(app).post('/api/v1/subscription/purchase').set('Authorization', `Bearer ${authToken}`).send({
             premiumPackageId: 1,
             price: 100
@@ -42,17 +42,19 @@ describe('Subscription API', () => {
         expect(response.body.error).toBe('Request price is incorrect')
     })
 
-    it('Can purchase a unlimited swipe', async () => {
+    test('Can purchase a unlimited swipe', async () => {
         const response = await request(app).post('/api/v1/subscription/purchase').set('Authorization', `Bearer ${authToken}`).send({
             premiumPackageId: 1,
             price: 120000
         })
 
+        console.error(response.body.error)
+
         expect(response.statusCode).toBe(201)
         expect(response.body.message).toBe('Package purchased')
     })
 
-    it('Prevent purchasing the same package', async () => {
+    test('Prevent purchasing the same package', async () => {
         const response = await request(app).post('/api/v1/subscription/purchase').set('Authorization', `Bearer ${authToken}`).send({
             premiumPackageId: 1,
             price: 120000
@@ -62,7 +64,7 @@ describe('Subscription API', () => {
         expect(response.body.error).toBe('User has bought this Premium Packages')
     })
 
-    it('Can purchase verified badge', async () => {
+    test('Can purchase verified badge', async () => {
         const response = await request(app).post('/api/v1/subscription/purchase').set('Authorization', `Bearer ${authToken}`).send({
             premiumPackageId: 2,
             price: 50000
@@ -72,7 +74,7 @@ describe('Subscription API', () => {
         expect(response.body.message).toBe('Package purchased')
     })
 
-    it('Prevent picking package is not exist if user send invalid package id', async () => {
+    test('Prevent picking package is not exist if user send invalid package id', async () => {
         const response = await request(app).post('/api/v1/subscription/purchase').set('Authorization', `Bearer ${authToken}`).send({
             premiumPackageId: 3,
             price: 50000

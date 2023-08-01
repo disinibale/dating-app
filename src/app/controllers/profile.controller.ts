@@ -38,7 +38,6 @@ export async function getMyProfile(req: Request, res: Response, next: NextFuncti
             missingProfile
         })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }
@@ -60,7 +59,6 @@ export async function updateProfile(req: Request, res: Response, next: NextFunct
             data: updatedProfile
         })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }

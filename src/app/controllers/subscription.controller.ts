@@ -20,7 +20,6 @@ export async function getAllPremiumPackage(req: Request, res: Response, next: Ne
             data: premiumPackages
         })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }
@@ -47,7 +46,6 @@ export async function purchasePremiumPackage(req: Request, res: Response, next: 
             data: purchasedPackage
         })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }

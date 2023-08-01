@@ -17,7 +17,6 @@ export function createValidator<T extends object>(validationClass: new () => T) 
             req.body = data as ModelCreationAttributes<T>;
             next()
         } catch (err) {
-            console.log(err)
             res.status(500).json({
                 message: 'Internal Server Error'
             })

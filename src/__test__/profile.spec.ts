@@ -17,14 +17,13 @@ describe('Profile API', () => {
         })
 
         authToken = response.body.data.token
-        console.log(authToken, '<<<<<< AUTH TOKEN')
-    });
+    }, 10000);
 
     afterAll(async () => {
 
     });
 
-    it('should get the users own profile', async () => {
+    test('should get the users own profile', async () => {
         const response = await request(app).get('/api/v1/profile').set('Authorization', `Bearer ${authToken}`)
 
         expect(response.statusCode).toBe(200)
@@ -38,7 +37,7 @@ describe('Profile API', () => {
         expect(response.body.data).toHaveProperty('gender');
     });
 
-    it('should update the user\'s profile', async () => {
+    test('should update the user\'s profile', async () => {
         const updatedProfileData = {
             bio: 'Updated bio',
             dateOfBirth: faker.date.anytime(),

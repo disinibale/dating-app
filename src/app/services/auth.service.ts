@@ -27,22 +27,17 @@ class AuthService {
     async signUp(data: UserCreationAttributes): Promise<User> {
         const { email, password } = data
         return connection.transaction(async (transaction: Transaction) => {
-            try {
-                const existingUser = await this.userService.findByEmail(email)
-    
-                if (existingUser) throw new EmailAlreadyRegisteredException('Email already registered!')
-    
-                const hashedPassword = await bcrypt.hash(password, 10)
+            const existingUser = await this.userService.findByEmail(email)
 
-                const createdUser = await this.userService.createUserWithTransaction({ ...data, password: hashedPassword }, transaction)
+            if (existingUser) throw new EmailAlreadyRegisteredException('Email already registered!')
 
-                await this.profileService.createProfileWithTransaction({ userId: createdUser.id } as ProfileCreationAttributes, transaction)
+            const hashedPassword = await bcrypt.hash(password, 10)
 
-                return createdUser
-            } catch (err) {
-                console.log(err)
-                throw err
-            }
+            const createdUser = await this.userService.createUserWithTransaction({ ...data, password: hashedPassword }, transaction)
+
+            await this.profileService.createProfileWithTransaction({ userId: createdUser.id } as ProfileCreationAttributes, transaction)
+
+            return createdUser
         })
     }
 

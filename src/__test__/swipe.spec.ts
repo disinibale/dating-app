@@ -11,7 +11,6 @@ import profileService from '../app/services/profile.service';
 import userSwipeService from '../app/services/userSwipe.service';
 import { Op } from 'sequelize';
 
-
 describe('Profile Matching API', () => {
     let app: Express
     let authToken: string = ''
@@ -53,7 +52,7 @@ describe('Profile Matching API', () => {
         }
 
 
-    });
+    }, 10000);
 
     afterAll(async () => {
         for (const data of mockProfile) {
@@ -73,7 +72,7 @@ describe('Profile Matching API', () => {
         }
     });
 
-    it('Can browse potential match and showing profiles of user opposite gender', async () => {
+    test('Can browse potential match and showing profiles of user opposite gender', async () => {
         const response = await request(app).get('/api/v1/matching').set('Authorization', `Bearer ${authToken}`)
         expect(response.statusCode).toBe(200)
         expect(response).toBe<Array<Profile>>
@@ -82,7 +81,7 @@ describe('Profile Matching API', () => {
         }
     })
 
-    it('Can swipe right the potential match', async () => {
+    test('Can swipe right the potential match', async () => {
         const response = await request(app)
             .post('/api/v1/matching/swipe')
             .set('Authorization', `Bearer ${authToken}`)
@@ -96,7 +95,7 @@ describe('Profile Matching API', () => {
         expect(response.body.message).toBe('Success')
     })
 
-    it('Cannot swipe the same profile within the same day', async () => {
+    test('Cannot swipe the same profile within the same day', async () => {
         const response = await request(app)
             .post('/api/v1/matching/swipe')
             .set('Authorization', `Bearer ${authToken}`)
@@ -110,7 +109,7 @@ describe('Profile Matching API', () => {
         expect(response.body.error).toBe('This profile has already swiped today')
     })
 
-    it('Can swipe left the potential match', async () => {
+    test('Can swipe left the potential match', async () => {
         const response = await request(app)
             .post('/api/v1/matching/swipe')
             .set('Authorization', `Bearer ${authToken}`)
@@ -124,7 +123,7 @@ describe('Profile Matching API', () => {
         expect(response.body.message).toBe('Success')
     })
 
-    it('Can only swipe for maximum 10 profile per days', async () => {
+    test('Can only swipe for maximum 10 profile per days', async () => {
         // Clear User Swipe First
         await userSwipeService.delete({ where: {} })
 

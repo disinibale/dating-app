@@ -12,6 +12,7 @@ import BadRequestException from '../exceptions/clientException/badRequest.except
 import ConflictRequestException from '../exceptions/clientException/conflictRequest.exception';
 import ForbiddenRequestException from '../exceptions/clientException/forbiddenRequest.exception';
 import userSubscriptionsService from '../services/userSubscriptions.service';
+import { mapPotentialProfile } from '../utils/profile.utils';
 
 export async function swipe(req: Request, res: Response, next: NextFunction): Promise<void> {
     const user = req.user
@@ -35,7 +36,6 @@ export async function swipe(req: Request, res: Response, next: NextFunction): Pr
             data: createdSwipe
         })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }
@@ -50,14 +50,14 @@ export async function browsePotentialMatch(req: Request, res: Response, next: Ne
         const swipedProfileIds = await UserSwipeService.getAllSwipedForToday(user?.userId as number)
         const mappedSwipedProfileIds = swipedProfileIds.map(swiped => swiped.profileId)
         const potentialMatch = await ProfileService.browsePotentialProfile(user?.userId as number, authenticatedUser.profile.gender, mappedSwipedProfileIds)
+        const mappedPotentialProfile = mapPotentialProfile(potentialMatch)
 
         res.status(200).json({
             message: `Showing total of ${potentialMatch.length} potential match`,
             code: 200,
-            data: potentialMatch,
+            data: mappedPotentialProfile,
         })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }

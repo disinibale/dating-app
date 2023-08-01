@@ -62,6 +62,7 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
         })
     } catch(err) {
         console.log(err)
+        throw err
     }
 })
 
